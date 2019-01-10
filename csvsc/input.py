@@ -1,6 +1,5 @@
 import os
 import csv
-from itertools import chain
 
 
 class InputStream:

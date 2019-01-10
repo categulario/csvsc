@@ -1,6 +1,7 @@
 from csvsc.input import InputStream
 from csvsc.mapper import Mapper
 
+
 class Process:
 
     def __init__(self, input=None, output=None, add_columns=None):

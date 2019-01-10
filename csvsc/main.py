@@ -3,6 +3,7 @@ import argparse
 from csvsc import Process
 from csvsc.mapper import ColSpec
 
+
 def main():
     parser = argparse.ArgumentParser(description='Organizes csv files')
 
