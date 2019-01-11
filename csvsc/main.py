@@ -10,6 +10,7 @@ def main():
     # TODO allow single file, single dir, multiple files, multiple dirs or
     # combinations
     parser.add_argument('input', help='directory to analize')
+    parser.add_argument('--ie', help='input encoding', default='utf-8', dest='input_encoding')
     # TODO allow file or directory
     parser.add_argument('output', help='where to store the resulting files')
 

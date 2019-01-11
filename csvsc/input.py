@@ -6,7 +6,7 @@ class InputStream:
 
     # TODO add flags for recursive search, by default simple listing
     # TODO add flags for extensions other that csv
-    def __init__(self, source):
+    def __init__(self, source, encoding=None):
         self.handles = []
 
         # TODO make the header skip a flag
@@ -16,7 +16,7 @@ class InputStream:
             files = filter(self._allowed_file, reversed(os.listdir(source)))
 
             for filename in files:
-                handle = open(os.path.join(source, filename))
+                handle = open(os.path.join(source, filename), encoding=encoding)
                 # TODO pass some arguments to CSV reader
                 reader = csv.reader(handle)
 

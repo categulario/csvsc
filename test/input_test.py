@@ -27,3 +27,15 @@ def test_input_stream():
         'data': ['4', '10'],
         'source': '/home/abraham/src/csvsc/test/assets/d1/a2m.csv',
     }
+
+
+def test_open_different_encoding():
+    inst = InputStream(
+        os.path.join(ASSETS_DIR, 'windows1252/'),
+        encoding='windows-1252',
+    )
+
+    assert next(inst) == {
+        'data': ['árbol'],
+        'source': '/home/abraham/src/csvsc/test/assets/windows1252/data.csv',
+    }
