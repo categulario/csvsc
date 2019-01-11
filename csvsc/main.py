@@ -2,6 +2,7 @@ import argparse
 
 from csvsc import Process
 from csvsc.mapper import ColSpec
+from csvsc.reducer import IdGrouping, Grouping, ReducerSpec
 
 
 def main():
@@ -22,6 +23,25 @@ def main():
         default=[],
         type=ColSpec,
         help="columns to add to the output",
+    )
+
+    parser.add_argument(
+        '-g --group',
+        metavar='GROUP_SPEC',
+        dest='grouping',
+        default=IdGrouping(),
+        type=Grouping,
+        help="how to group rows to compute aggregates",
+    )
+
+    parser.add_argument(
+        '-r --reduce',
+        nargs='+',
+        metavar='REDUCER_SPEC',
+        dest='reducer_columns',
+        default=[],
+        type=ReducerSpec,
+        help="columns to be computed by reducing or folding other columns",
     )
 
     args = parser.parse_args()

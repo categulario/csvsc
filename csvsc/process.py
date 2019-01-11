@@ -6,11 +6,13 @@ from csvsc.reducer import Reducer
 
 class Process:
 
-    def __init__(self, input=None, input_encoding='utf-8', output=None, add_columns=None):
+    def __init__(self, input=None, input_encoding='utf-8', output=None,
+                 add_columns=None, grouping=None):
         self.input = input
         self.output = output
         self.add_columns = add_columns
         self.input_encoding = input_encoding
+        self.grouping = grouping
 
     def __call__(self):
         # Step 1. Get the source
@@ -20,7 +22,7 @@ class Process:
         mapper = Mapper(input_stream, add_columns=self.add_columns)
 
         # Step 3. Reduce, aggregate
-        reducer = Reducer(mapper)
+        reducer = Reducer(mapper, grouping=self.grouping)
 
         # Step 4. Redistribute to destinations
         dist = Distributor(reducer, self.output)
