@@ -1,6 +1,6 @@
 import argparse
 
-from csvsc import Process
+from csvsc.process import Process
 from csvsc.mapper import ColSpec
 from csvsc.reducer import IdGrouping, Grouping, ReducerSpec
 
@@ -11,7 +11,12 @@ def main():
     # TODO allow single file, single dir, multiple files, multiple dirs or
     # combinations
     parser.add_argument('input', help='directory to analize')
-    parser.add_argument('-ie --input-encoding', help='input encoding', default='utf-8', dest='input_encoding')
+    parser.add_argument(
+        '-ie --input-encoding',
+        help='input encoding',
+        default='utf-8',
+        dest='input_encoding',
+    )
     # TODO allow file or directory
     parser.add_argument('output', help='where to store the resulting files')
 

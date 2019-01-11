@@ -16,7 +16,10 @@ class InputStream:
             files = filter(self._allowed_file, reversed(os.listdir(source)))
 
             for filename in files:
-                handle = open(os.path.join(source, filename), encoding=encoding)
+                handle = open(
+                    os.path.join(source, filename),
+                    encoding=encoding
+                )
                 # TODO pass some arguments to CSV reader
                 reader = csv.reader(handle)
 
