@@ -1,6 +1,7 @@
 from csvsc.input import InputStream
 from csvsc.mapper import Mapper
 from csvsc.distributor import Distributor
+from csvsc.reducer import Reducer
 
 
 class Process:
@@ -19,7 +20,8 @@ class Process:
         mapper = Mapper(input_stream, add_columns=self.add_columns)
 
         # Step 3. Reduce, aggregate
+        reducer = Reducer(mapper)
 
         # Step 4. Redistribute to destinations
-        dist = Distributor(mapper, self.output)
+        dist = Distributor(reducer, self.output)
         dist.flush()
