@@ -47,3 +47,15 @@ def test_reducer_max():
 
     assert next(r) == {'data': ['1', '2', '4.0'], 'target': 'a'}
     assert next(r) == {'data': ['2', '7', '9.0'], 'target': 'a'}
+
+
+def test_reducer_sum():
+    r = Reducer([
+        {'data': ['1', '2'], 'target': 'a'},
+        {'data': ['1', '4'], 'target': 'a'},
+        {'data': ['2', '7'], 'target': 'a'},
+        {'data': ['2', '9'], 'target': 'a'},
+    ], grouping=Grouping('0'), columns=[Reducer.from_spec('sum:1')])
+
+    assert next(r) == {'data': ['1', '2', '6.0'], 'target': 'a'}
+    assert next(r) == {'data': ['2', '7', '16.0'], 'target': 'a'}

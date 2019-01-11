@@ -66,7 +66,7 @@ class ReducerMax(ColumnReducer):
 
     def update(self, row):
         prop = reduce(max, map(
-            lambda x: float(x[1]),
+            lambda x: float(x[1]) if x[1] else -float('inf'),
             filter(
                 lambda x: x[0] in self.cols,
                 enumerate(row)
@@ -89,7 +89,7 @@ class ReducerMin(ColumnReducer):
 
     def update(self, row):
         prop = reduce(min, map(
-            lambda x: float(x[1]),
+            lambda x: float(x[1]) if x[1] else float('inf'),
             filter(
                 lambda x: x[0] in self.cols,
                 enumerate(row)
@@ -101,6 +101,26 @@ class ReducerMin(ColumnReducer):
 
     def done(self):
         return str(self.min)
+
+
+class ReducerSum(ColumnReducer):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.sum = 0.0
+
+    def update(self, row):
+        self.sum += reduce(operator.add, map(
+            lambda x: float(x[1]) if x[1] else 0,
+            filter(
+                lambda x: x[0] in self.cols,
+                enumerate(row)
+            )
+        ), 0)
+
+    def done(self):
+        return str(self.sum)
 
 
 class ReducerAvg(ColumnReducer):
@@ -134,6 +154,7 @@ class Reducer:
         'max': ReducerMax,
         'min': ReducerMin,
         'avg': ReducerAvg,
+        'sum': ReducerSum,
     }
 
     @classmethod

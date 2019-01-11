@@ -27,7 +27,7 @@ class Process:
         dist = Distributor(mapper, self.output)
 
         # Step 4. Reduce, aggregate
-        reducer = Reducer(dist, grouping=self.grouping)
+        reducer = Reducer(dist, grouping=self.grouping, columns=self.reducer_columns)
 
         # Step 5. Flush to destination
         Flusher(reducer).flush()
