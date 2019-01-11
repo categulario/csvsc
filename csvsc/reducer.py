@@ -14,9 +14,9 @@ class Grouping:
             lambda x: x[1],
             filter(
                 lambda x: x[0] in self.columns,
-                enumerate(row)
+                enumerate(row['data'])
             )
-        ))
+        )) + row['target']
 
 
 class IdGrouping(Grouping):
@@ -39,10 +39,13 @@ class Group:
             self.rest = row
 
         for col in self.columns:
-            col.update(row)
+            col.update(row['data'])
 
     def row(self):
-        return self.rest + [c.done() for c in self.columns]
+        tmp = self.rest
+        tmp['data'] += [c.done() for c in self.columns]
+
+        return tmp
 
 
 class ColumnReducer:
@@ -51,7 +54,7 @@ class ColumnReducer:
         self.cols = cols
 
     def clone(self):
-        return type(self)(self.cols)
+        return type(self)(self.cols[:])
 
 
 class ReducerMax(ColumnReducer):

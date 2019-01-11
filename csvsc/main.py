@@ -2,7 +2,7 @@ import argparse
 
 from csvsc.process import Process
 from csvsc.mapper import ColSpec
-from csvsc.reducer import IdGrouping, Grouping, ReducerSpec
+from csvsc.reducer import IdGrouping, Grouping, Reducer
 
 
 def main():
@@ -45,7 +45,7 @@ def main():
         metavar='REDUCER_SPEC',
         dest='reducer_columns',
         default=[],
-        type=ReducerSpec,
+        type=Reducer.from_spec,
         help="columns to be computed by reducing or folding other columns",
     )
 

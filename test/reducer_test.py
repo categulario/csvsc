@@ -3,47 +3,47 @@ from csvsc.reducer import Reducer, Grouping
 
 def test_reducer_id_function():
     r = Reducer([
-        ['a'],
-        ['b'],
-        ['c'],
+        {'data': ['a'], 'target': 'a'},
+        {'data': ['b'], 'target': 'a'},
+        {'data': ['c'], 'target': 'a'},
     ])
 
-    assert next(r) == ['a']
-    assert next(r) == ['b']
-    assert next(r) == ['c']
+    assert next(r) == {'data': ['a'], 'target': 'a'}
+    assert next(r) == {'data': ['b'], 'target': 'a'}
+    assert next(r) == {'data': ['c'], 'target': 'a'}
 
 
 def test_reducer_avg():
     r = Reducer([
-        ['1', '2'],
-        ['1', '4'],
-        ['2', '7'],
-        ['2', '9'],
+        {'data': ['1', '2'], 'target': 'a'},
+        {'data': ['1', '4'], 'target': 'a'},
+        {'data': ['2', '7'], 'target': 'a'},
+        {'data': ['2', '9'], 'target': 'a'},
     ], grouping=Grouping('0'), columns=[Reducer.from_spec('avg:1')])
 
-    assert next(r) == ['1', '2', '3.0']
-    assert next(r) == ['2', '7', '8.0']
+    assert next(r) == {'data': ['1', '2', '3.0'], 'target': 'a'}
+    assert next(r) == {'data': ['2', '7', '8.0'], 'target': 'a'}
 
 
 def test_reducer_min():
     r = Reducer([
-        ['1', '2'],
-        ['1', '4'],
-        ['2', '7'],
-        ['2', '9'],
+        {'data': ['1', '2'], 'target': 'a'},
+        {'data': ['1', '4'], 'target': 'a'},
+        {'data': ['2', '7'], 'target': 'a'},
+        {'data': ['2', '9'], 'target': 'a'},
     ], grouping=Grouping('0'), columns=[Reducer.from_spec('min:1')])
 
-    assert next(r) == ['1', '2', '2.0']
-    assert next(r) == ['2', '7', '7.0']
+    assert next(r) == {'data': ['1', '2', '2.0'], 'target': 'a'}
+    assert next(r) == {'data': ['2', '7', '7.0'], 'target': 'a'}
 
 
 def test_reducer_max():
     r = Reducer([
-        ['1', '2'],
-        ['1', '4'],
-        ['2', '7'],
-        ['2', '9'],
+        {'data': ['1', '2'], 'target': 'a'},
+        {'data': ['1', '4'], 'target': 'a'},
+        {'data': ['2', '7'], 'target': 'a'},
+        {'data': ['2', '9'], 'target': 'a'},
     ], grouping=Grouping('0'), columns=[Reducer.from_spec('max:1')])
 
-    assert next(r) == ['1', '2', '4.0']
-    assert next(r) == ['2', '7', '9.0']
+    assert next(r) == {'data': ['1', '2', '4.0'], 'target': 'a'}
+    assert next(r) == {'data': ['2', '7', '9.0'], 'target': 'a'}
