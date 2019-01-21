@@ -6,7 +6,7 @@ def varify(input_str):
     nfkd_form = unicodedata.normalize('NFKD', input_str)
     return u"".join([
         c for c in nfkd_form if not unicodedata.combining(c)
-    ]).replace(' ', '_').lower()
+    ]).replace(' ', '_').replace('.', '').lower()
 
 
 class Distributor:
