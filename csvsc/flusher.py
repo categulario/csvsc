@@ -1,3 +1,4 @@
+import os
 import csv
 
 
@@ -10,6 +11,9 @@ class Flusher:
     def get_target(self, target_name):
         if target_name in self.targets:
             return self.targets[target_name][1]
+
+        # Create the directory if it does not exist
+        os.makedirs(os.path.dirname(target_name), exist_ok=True)
 
         target = open(target_name, 'w')
         writer = csv.writer(target)
