@@ -11,8 +11,9 @@ def main():
     # TODO allow single file, single dir, multiple files, multiple dirs or
     # combinations
     parser.add_argument('input', help='directory to analize')
+
     parser.add_argument(
-        '-ie --input-encoding',
+        '-ie', '--input-encoding',
         help='input encoding',
         default='utf-8',
         dest='input_encoding',
@@ -21,7 +22,7 @@ def main():
     parser.add_argument('output', help='where to store the resulting files')
 
     parser.add_argument(
-        '-a --add-columns',
+        '-a', '--add-columns',
         nargs='+',
         metavar='COL_SPEC',
         dest='add_columns',
@@ -31,7 +32,7 @@ def main():
     )
 
     parser.add_argument(
-        '-g --group',
+        '-g', '--group-by',
         metavar='GROUP_SPEC',
         dest='grouping',
         default=IdGrouping(),
@@ -40,7 +41,7 @@ def main():
     )
 
     parser.add_argument(
-        '-r --reduce',
+        '-r', '--reduce',
         nargs='+',
         metavar='REDUCER_SPEC',
         dest='reducer_columns',

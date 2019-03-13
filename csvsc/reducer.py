@@ -7,7 +7,7 @@ import operator
 class Grouping:
 
     def __init__(self, columns):
-        self.columns = list(map(int, columns.split(',')))
+        self.columns = columns.split(',')
 
     def __call__(self, row):
         return '_'.join(map(
@@ -160,7 +160,7 @@ class Reducer:
     @classmethod
     def from_spec(cls, spec):
         func, cols = spec.split(':')
-        cols = list(map(int, cols.split(',')))
+        cols = cols.split(',')
 
         return cls.reducers[func](cols)
 
